@@ -16,13 +16,13 @@ Work Flow
 Example
 =======
 
-    #import "GSAutomation/library.js"
+    #import "GSAutomation/lib/gsautomation.js"
     var task1 = [
         [Tap, "Button1"],
         [Check, "Text1", "Text2"],
     ];
 
-    function main() {        
+    function main() {
         performTask(task1);
     }
 
@@ -97,6 +97,9 @@ Supported Actions
     </tr>
     <tr>
         <td>WaitFor</td><td>Wait for some additional time until an element appears. This action is normally unnecessary since a maximum of 10-second wait is applied automatically in order to access an element. Use this only to add addition waiting time.</td><td>2nd item is the element to wait for, and the 3rd item is the maximum time to wait (seconds).</td><td>No</td>
+    </tr>
+    <tr>
+        <td>Background</td><td>Background the app for a while and return to the app.</td><td>2nd item is time to background (seconds).</td><td>No</td>
     </tr>
     <tr>
         <td>Feature</td><td>Starting a feature. The steps after this step and before the next feature call or the end this task array will be grouped into this feature.</td><td>the name of the feature</td><td>No</td>
