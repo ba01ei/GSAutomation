@@ -117,8 +117,6 @@ Top level elements can be defined directly through their names, e.g. title for a
 
 To specify the type of the element, we can use the format "((type))name". Type names should be based on UIAutomation API (e.g. UIAButton, UIATableView), but for simplicity we can skip "UIA", and just call it Button. So we can define elements like "((Button))Log In".
 
-When there are multiple items matching the same type and name, we can do something like "((TableCell))[[1]]" to specify an index. The index is 0 based.
-
 To investigate the current hierarchy and available elements, insert a step [Investigate].
 
 For example, if you see this from [Investigate]:
@@ -134,7 +132,23 @@ For example, if you see this from [Investigate]:
 
 You can access "Cell Two" by:
 
-    "((Popover))::((TableView))::((TableCell))[[2]]::Cell Two"
+    "((Popover))::((TableView))::((TableCell))::Cell Two"
+
+When there are multiple items matching the same type and name, we can do something like "((Element))[[1]]" to specify an index. The index is 0 based. For example:
+
+    [null] [object UIAWindow] @ (0, 0) w=768, h=1024
+    [null] [object UIAScrollView] @ (0, 0) w=400, h=400
+    - [Hello] [object UIAStaticText] @ (0, 0) w=250, h=44
+    - [World] [object UIAStaticText] @ (0, 100) w=250, h=44
+    [null] [object UIAScrollView] @ (0, 0) w=400, h=400
+    - [Hi] [object UIAStaticText] @ (0, 0) w=250, h=44
+    - [Hi] [object UIAStaticText] @ (0, 100) w=250, h=44
+
+You can access the second "Hi" label by:
+
+    "((ScrollView))::Hi[[1]]"
+
+You don't need to include the index for the parent object (otherwise it's going to be painful to manage since it's hard to predict the order of multiple scrollviews in the window). The index is only for the deepest item in the chain.
 
 
 Additional Helper Methods
